@@ -26,6 +26,30 @@ app.get('/store', function(req, res) {
     }
   })
 })
+app.post("/login",function(req,res){
+  if(req.url==='/login'){
+    res.writeHead(200,{"content-type":"text/html"})
+    fs.readFile('./login.html',"UTF-8").pipe(res);
+    console.log("hell")
+  }
+    if (req.method==="POST"){
+      var data="";
+      req.on("data",function(chunk){
+        data+=chunk;
+      });
+      req.on("end",function(chunk){
+        
+        var q=querystring.parse(data);
+        MongoClient.connect(url,function(err,result){
+          if(err) throw err;
+        
+          Db.collection('student').insertOne(q,function(err,res){
+            if (err) throw err;
+            console.log("data insertded")
+            Db.close();
+
+          }) 
+  
 
 // app.post('/purchase', function(req, res) {
 //   fs.readFile('items.json', function(error, data) {
