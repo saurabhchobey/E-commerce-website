@@ -8,6 +8,11 @@
 const express = require('express')
 const app = express()
 const fs = require('fs')
+const bodyParser=require('body-Parser')
+const  http=require('http');
+const { Db } = require('mongodb');
+var MongoClient=require('mongodb').MongoClient;
+var url="mongodb://localhost:27017/college"
 // const stripe = require('stripe')(stripeSecretKey)
 
 app.set('view engine', 'ejs')
